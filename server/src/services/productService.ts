@@ -1,17 +1,36 @@
 import { Product } from "../models/productModel";
+import { ProductType } from "../utils/types";
 
 class ProductService {
-  public static async addProduct() {
+  public static async addProduct(product: ProductType) {
     return await Product.create({
-      name: "mouse",
-      price: 123,
-      category: "ele",
-      stock: 2,
+      name: product.name,
+      price: product.price,
+      category: product.category,
+      stock: product.stock,
     });
   }
 
   public static async listProduct() {
-    return await Product.find();
+    return await Product.find().sort({ name: 1 });
+  }
+
+  public static async updateProduct(id: string, product: ProductType) {
+    return await Product.updateOne(
+      { _id: id },
+      {
+        $set: {
+          name: product.name,
+          price: product.price,
+          category: product.category,
+          stock: product.stock,
+        },
+      }
+    );
+  }
+
+  public static async deleteProduct(id: string) {
+    return await Product.deleteOne({ _id: id });
   }
 }
 
