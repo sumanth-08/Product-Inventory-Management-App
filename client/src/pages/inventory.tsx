@@ -1,14 +1,12 @@
 import { productAPI } from "@/api/service";
 import type { Product } from "@/api/types";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import LoadingSkeleton from "@/components/loading-skeleton";
 import AddProduct from "@/components/add-product";
 import { toast } from "sonner";
 import UpdateProduct from "@/components/update-product";
-import { Button } from "@/components/ui/button";
 import DeleteProduct from "@/components/delete-product";
 
 const Inventory = () => {
