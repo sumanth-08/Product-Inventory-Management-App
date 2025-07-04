@@ -7,6 +7,7 @@ import { Label } from "./ui/label";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "sonner";
+import { posthogEvent } from "@/utils/posthog";
 
 const AddProduct = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ const AddProduct = () => {
     try {
       const res = await productAPI.postService(`/product/create`, data);
       if (res.responseCode === 200) {
+        posthogEvent.addProduct()
         setIsOpen(false);
         setErrMsg(undefined);
         form.reset();
